@@ -1,0 +1,22 @@
+<% layout('layouts/boilerplate') %>
+
+<%- include('../partials/navbar') %>    
+
+<div class="row">
+    <div class="col-6 mx-auto">
+        <form action="/blogs/<%=foundProduct._id%>?_method=PATCH" method="POST">
+
+            <div class="mb-3">
+                <label for="content">Content: </label>
+                <textarea class="form-control" name="content" id="content" rows="5" placeholder="Content of the product"><%=foundProduct.content%></textarea>
+            </div>
+
+    
+
+            <button class="btn btn-sm btn-success" type="submit">Edit Blog</button>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

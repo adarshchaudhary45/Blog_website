@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate') %>
+
+<%- include('../partials/navbar') %>     
+
+<div class="row">      
+    <div class="col-lg-4 mt-3">
+        <div class="card shadow mx-auto" style="width: 18rem;">
+            <div class="card-body">
+                <h2 class="card-title"><%=foundProduct.content%></h2>
+                <a href="/blogs/<%=foundProduct._id%>" class="btn btn-info">View Notes</a>
+                <a href="/blogs/<%=foundProduct._id%>/edit" class="btn btn-sm btn-light">Edit</a>
+                <form class="d-inline-block" action="/blogs/<%=foundProduct._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1>Apka shuaagat hian hamare Note-App mai😉</h1>
+
+</body>
+</html>

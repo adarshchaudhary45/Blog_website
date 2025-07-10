@@ -1,0 +1,25 @@
+<% layout('layouts/boilerplate') %>
+
+<%- include('../partials/navbar') %>     
+
+<div class="row">
+
+        <% for(let item of blogs){ %>
+            
+            <div class="col-lg-4 mt-3">
+                <div class="card shadow mx-auto" style="width: 18rem;">
+                    <div class="card-body">
+                      <h2 class="card-title"><%=item.content%></h2>
+                      <a href="/blogs/<%=item._id%>" class="btn btn-info">View Notes</a>
+                      <form class="d-inline-block" action="/blogs/<%=item._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+
+        <% } %>
+</div>
+
+</body>
+</html>

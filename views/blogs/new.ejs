@@ -1,0 +1,62 @@
+<% layout('layouts/boilerplate') %>
+
+<%- include('../partials/navbar') %>    
+
+<div class="row">
+    <div class="col-6 mx-auto">
+        <form action="/blogs" method="POST">
+            <div class="mb-3">
+                <label for="content">Content: </label>
+                <textarea name="content" class="form-control" id="content" rows="5" placeholder="Content of the blog"></textarea>
+                <button type="button" id="record">🎤 Record</button>
+            </div>
+            <button class="btn btn-sm btn-success" type="submit">Add Note</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const recordBtn = document.getElementById("record");
+    const noteInput = document.getElementById("content");
+
+    if (!("SpeechRecognition" in window || "webkitSpeechRecognition" in window)) {
+        alert("Your browser does not support Speech Recognition.");
+    } else {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.lang = "en-US";
+        recognition.interimResults = false; 
+
+        let isRecording = false; 
+
+        recordBtn.addEventListener("click", () => {
+            if (!isRecording) {
+                recognition.start();
+                recordBtn.innerText = "🛑 Stop";
+                isRecording = true;
+            } else {
+                recognition.stop();
+                recordBtn.innerText = "🎤 Record";
+                isRecording = false;
+            }
+        });
+
+        recognition.onresult = (event) => {
+            noteInput.value += event.results[0][0].transcript + " "; // Append instead of replace
+        };
+
+        recognition.onerror = (event) => {
+            alert("Speech recognition error: " + event.error);
+            recordBtn.innerText = "🎤 Record";
+            isRecording = false;
+        };
+
+        recognition.onend = () => {
+            recordBtn.innerText = "🎤 Record";
+            isRecording = false;
+        };
+    }
+</script>
+
+</body>
+</html>
